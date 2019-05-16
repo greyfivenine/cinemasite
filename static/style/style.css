@@ -1,0 +1,146 @@
+body{
+    font-family: 'Roboto', sans-serif;
+    color: #232121;
+    background-color: green;
+}
+
+ul, li{
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+
+header{
+    margin: 10px 0;
+}
+
+h3{
+    font-size: 22px;
+    margin-bottom: 14px;
+}
+
+.card-header{
+    text-align: left;
+}
+
+.card-body{
+    text-align: left!important;
+}
+
+
+.films__item{
+    font-size: 16px!important;
+}
+
+.logo p{
+    font-family: 'Cormorant Unicase', serif;
+    font-weight: 600;
+    font-size: 50px;
+    margin: 0;
+    text-align: center;
+}
+
+.nav a{
+    font-size: 22px;
+    color: #232121;
+    margin-right: 30px;
+    /* background-color: #DBDACA; */
+}
+
+.description__text{
+    text-align: justify;
+}
+
+.films__item{
+    margin-bottom: 10px;
+    display: flex!important;
+}
+
+.info__about p{
+    margin-bottom: 8px;
+}
+
+.info__about span{
+    color: rgb(152, 152, 152);
+}
+
+.item__img img{
+    width: 100%
+    min-height: 160px;
+}
+
+.item__info a{
+    color: #232121;
+}
+
+.item__info{
+    padding-top: 20px;
+    padding-left: 40px;
+}
+
+.item__detail{
+    float: right;
+    margin-left: auto;
+    max-width: 600px;
+    padding: 20px;
+}
+
+
+
+.footer-copyright{
+    background-color: #CDCDCD!important;
+    /* position: absolute;
+    bottom: 0;
+    width: 100%; */
+}
+
+.footer p{
+    text-align: center;
+}
+
+#main_content div.films__item{
+    background-color: #DBDACA;
+    height: auto;
+}
+
+#carousel .rcl{
+    background-color: #DBDBB9;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 800px) {
+    .item__detail{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    nav a{
+        margin-left: 0!important;
+        margin-right: 0!important;
+    }
+}
+
+
+/* на sm */
+@media (min-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+  a .flex-sm-fill{
+      font-size: 14px!important;
+  }
+}
+/* на md */
+@media (min-width: 992px) {
+  html {
+    font-size: 16px;
+  }
+}
+/* на lg */
+@media (min-width: 1200px) {
+  html {
+    font-size: 18px;
+  }
+}

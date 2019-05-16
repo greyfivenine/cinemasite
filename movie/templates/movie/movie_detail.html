@@ -1,0 +1,150 @@
+{% extends 'movie/base_movie.html' %}
+
+{% block title %}
+    {{ movie.title }} - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<section id="main_content" class="main_content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 col-12 p-0">
+
+                <div class="my_label mb-3">
+                    <h2 class="p-2">{{ movie.title }}</h2>
+                </div>
+
+                <div class="films__item">
+                    <div class="item__img">
+                        <img src="{{ MEDIA_URL }}{{ movie.image }}" width="120" alt="Миллиард">
+                    </div>
+                    <div class="item__info">
+                        <div class="info__title">
+                            <h3>
+                                <a href="#">{{ movie.title }}</a>
+                            </h3>
+                        </div>
+                        <div class="info__about">
+                            <p><span>Производство:</span> {{ movie.country }}</p>
+                            <p><span>Жанр:</span> {{ movie.genre }}</p>
+                            <p><span>Актеры:</span> {{ movie.actors }}</p>
+                            <p><span>Продолжительность:</span> {{ movie.duration }}</p>
+                            <p><span>Режиссёр:</span> {{ movie.director }}</p>
+                            <p><span>Возрастное ограничение:</span> {{ movie.age }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="description p-2">
+                    <h3>Описание:</h3>
+                    <p class="description__text">
+                        {{ movie.description }}
+                    </p>
+                </div>
+
+                <div class="schedule mt-5">
+                    <h3 class="p-2">Расписание сеансов:</h3>
+                    <div class="row">
+                        {% for sc_elem in movie.schedule_set.all %}
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    Дата: {{ sc_elem.movie_date }}
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">Цена: {{ sc_elem.movie_price }} рублей</p>
+                                    <p class="card-text">Формат: {{ sc_elem.movie_format }}</p>
+                                    <a href="{{ sc_elem.get_absolute_url }}" class="btn btn-block">Купить билет</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="comments__block mt-2">
+                    <h3 class="p-2">Комментарии:</h3>
+                        <div class="col-12 p-0">
+                            {% if movie.comment_set.all %}
+                                {% for comment in movie.comment_set.all %}
+                                <div class="comment">
+                                    <div class="avatar p-2">
+                                        <div class="img-center">
+                                            {% load movie_filters %}
+                                            <img src="{{ comment.author_email|gravatar_url:80 }}" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="content">
+                                        <div class="content__header">
+                                            <div class="nickname">
+                                                <h3>{{ comment.comment_author }}</h3>
+                                            </div>
+                                            <div class="post__date">
+                                                <p>{{ comment.comment_date }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="content__text">
+                                            <p>{{ comment.comment_text }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            {% else %}
+                            <div class="comment">
+                                <div class="avatar p-2">
+                                    <div class="img-center">
+                                        <img src="https://www.gravatar.com/avatar" alt="">
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <div class="content__header">
+                                        <div class="nickname">
+                                            <h3>Система</h3>
+                                        </div>
+                                        <div class="post__date">
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                    <div class="content__text">
+                                        <p>Еще никто не оставил свой отзыв о фильме. Станьте первым,кто сделает это!</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                        </div>
+                </div>
+
+
+                <div class="add__comment">
+                    <h3 class="p-2">Добавить комментарий:</h3>
+                    <form class="p-2" action="{% url 'add_comment_url' slug=movie.slug %}" method="post">
+                        {% csrf_token %}
+                        {% if form.errors %}
+                            <div class="alert alert-danger">
+                                {{ form.errors }}
+                            </div>
+                        {% endif %}
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                {{ form.comment_author.label }}
+                                {{ form.comment_author }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                {{ form.author_email.label }}
+                                {{ form.author_email }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                           {{ form.comment_text.label }}
+                           {{ form.comment_text }}
+                       </div>
+
+                        <button type="submit" class="btn btn-primary">Опубликовать комментарий</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

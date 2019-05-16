@@ -1,0 +1,59 @@
+{% extends 'movie/base_movie.html' %}
+
+{% block title %}
+    Купить билет - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+<section id="main_content" class="main_content">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 col-12 p-0">
+
+                <div class="my_label mb-3">
+                    <h2 class="p-2">{{ sc.movie_name.title }} - {{ sc.movie_date }} Ряд: {{ place.hall_row }}, Место: {{ place.hall_place }}</h2>
+                </div>
+
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                    <form action="{{ place.get_absolute_url }}" method="post">
+                        {% csrf_token %}
+                        {% if form.errors %}
+                            <div class="alert alert-danger">
+                                {% for elem in form.errors.values %}
+                                    {{ elem }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                        <div class="form-group">
+                            {{ form.payment_method.label }}
+                            {{ form.payment_method }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.card_owner.label }}
+                            {{ form.card_owner }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.card_number.label }}
+                            {{ form.card_number }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.card_cvc.label }}
+                            {{ form.card_cvc }}
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Оплата</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+{% endblock %}

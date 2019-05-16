@@ -1,0 +1,45 @@
+{% extends 'movie/base_movie.html' %}
+
+{% block title %}
+    О нас - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<section id="main_content" class="main_content">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 p-0">
+
+                <div class="my_label mb-3">
+                    <h2>О проекте:</h2>
+                </div>
+
+                <div class="description">
+
+                    <p class="description__text">
+                        {{ info.description }}
+                    </p>
+
+                    <p class="email__text">
+                        По всем вопросам работы сайта можете писать нам на почту - <a href="#">{{ info.email_field }}</a>.
+                    </p>
+                    <p class="address__text">
+                        Наш адрес - {{ info.address }}.
+                    </p>
+                </div>
+                <div class="my_label mb-3">
+                    <h2>Мы на карте:</h2>
+                </div>
+                <div class="map__place">
+                    <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A1694cb49cca57a89dd32a861237f697ac91dfa0e18cafcf10184779ee6090083&amp;width=100%25&amp;height=600&amp;lang=ru_RU&amp;scroll=true"></script>
+                </div>
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

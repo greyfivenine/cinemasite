@@ -1,0 +1,259 @@
+body{
+    font-family: 'Roboto', sans-serif;
+    color: #232121;
+}
+
+ul, li{
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+
+
+.red{
+    background-color: red!important;
+}
+
+.tablem{
+    background-color: red;
+    height: 100px
+}
+
+.orange{
+    color: orange;
+}
+
+table td{
+    padding: 2px;
+}
+
+.block{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 30px;
+    background-color: #999999;
+    color: #000;
+}
+
+.table td{
+    padding: 0;
+    height: 30px;
+    width: 30px;
+}
+
+a.block:link {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+   }
+a.block:visited {
+       text-decoration: none;
+       color: #000;
+   }
+a.block:active {
+        text-decoration: none;
+        color: #000;
+    }
+a.block:hover {
+    text-decoration: underline; /* Делает ссылку подчеркнутой при наведении на нее курсора */
+    color: #000; /* Цвет ссылки */
+   }
+
+
+
+#header .logo{
+    /* background-color: #CDCDCD!important; */
+}
+
+header{
+    margin-bottom: 10px;
+}
+
+h3{
+    font-size: 22px;
+    margin-bottom: 14px;
+}
+
+.card-header{
+    text-align: left;
+}
+
+.card-body{
+    text-align: left!important;
+}
+
+.avatar img{
+    /*width: 100%;*/
+    /*height: auto;*/
+}
+
+.avatar .img-center{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.comment{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    min-height: 110px!important;
+}
+
+.avatar{
+    width: 130px;
+    background-color: lightgrey;
+}
+
+
+.content{
+    display: flex;
+    flex-direction: column;
+    background-color: lightgrey;
+    flex-grow: 1;
+    margin-left: 15px;
+    min-height: 110px;
+}
+
+.content p{
+    margin-bottom: 0;
+}
+
+.content h3,p{
+    padding: 10px;
+}
+
+.content__text{
+    height: 100%;
+}
+
+.content__header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.content__text p{
+    font-size: 16px;
+}
+
+#id_comment_text{
+    min-height: 150px!important;
+}
+
+.card-body .btn{
+    background-color: #CDCDCD!important;
+}
+
+.films__item{
+    font-size: 16px!important;
+}
+
+.logo p{
+    font-family: 'Cormorant Unicase', serif;
+    font-weight: 600;
+    font-size: 50px;
+    margin: 0;
+    text-align: center;
+}
+
+.nav a{
+    font-size: 22px;
+    color: #232121;
+    margin-right: 30px;
+    /* background-color: #DBDACA; */
+}
+
+.description__text{
+    text-align: justify;
+}
+
+.films__item{
+    margin-bottom: 10px;
+    display: flex!important;
+}
+
+.info__about p{
+    margin-bottom: 8px;
+}
+
+.info__about span{
+    color: rgb(152, 152, 152);
+}
+
+.item__img img{
+    width: 100%
+    min-height: 160px;
+}
+
+.item__info a{
+    color: #232121;
+}
+
+.item__info{
+    padding-top: 20px;
+    padding-left: 40px;
+}
+
+.item__detail{
+    float: right;
+    margin-left: auto;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.footer-copyright{
+    background-color: #CDCDCD!important;
+    /* position: absolute;
+    bottom: 0;
+    width: 100%; */
+}
+
+.footer p{
+    text-align: center;
+}
+
+#main_content div.films__item{
+    background-color: #DBDACA;
+    height: auto;
+}
+
+#carousel .rcl{
+    background-color: #DBDBB9;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width:1000px) {
+
+}
+
+@media screen and (max-width: 800px) {
+    .item__detail{
+        display: none;
+    }
+    body p{
+        font-size: 14px!important;
+    }
+
+    .logo p{
+        font-size: 50px!important;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    nav a{
+        margin-left: 0!important;
+        margin-right: 0!important;
+    }
+
+    .nickname h3{
+        font-size: 16px!important;
+    }
+
+    body p{
+        font-size: 12px!important;
+    }
+}

@@ -1,0 +1,41 @@
+{% extends 'movie/base_movie.html' %}
+
+{% block title %}
+    Расписание - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 col-12 p-0">
+                <div class="schedule mt-5">
+                    <h2 class="p-2">Расписание сеансов:</h2>
+                    {% load movie_filters %}
+                    {% for movie in movies %}
+                        {% if movie.schedule_set.all|now_schedule_count > 0 %}
+                            <h3 class="p-2">{{ movie.title }}</h3>
+                            <div class="row">
+                                {% for sc_elem in movie.schedule_set.all|now_schedule %}
+                                    <div class="col-lg-4 col-sm-6">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                Дата: {{ sc_elem.movie_date }}
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="card-text">Цена: {{ sc_elem.movie_price }} рублей</p>
+                                                <p class="card-text">Формат: {{ sc_elem.movie_format }}</p>
+                                                <a href="{{ sc_elem.get_absolute_url }}" class="btn btn-block">Купить билет</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

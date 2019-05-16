@@ -1,0 +1,39 @@
+{% extends 'movie/base_movie.html' %}
+
+{% block title %}
+    Расписание - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<section id="main_content" class="main_content">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 col-12 p-0">
+
+                <div class="my_label mb-3">
+                    <h2 class="p-2">{{ sc.movie_name.title }} - {{ sc.movie_date }}</h2>
+                </div>
+
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                    <table class="table-responsive">
+                        {% for key, value in hall.items %}
+                            <tr>
+                                {% for place in value %}
+                                    {% if place.is_bought %}
+                                        <td><a href="" class="block red">{{ place.hall_place }}</a></td>
+                                    {% else %}
+                                        <td><a href="{{ place.get_absolute_url }}" class="block">{{ place.hall_place }}</a></td>
+                                    {% endif %}
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
