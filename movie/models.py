@@ -55,7 +55,7 @@ class Comment(models.Model):
     comment_author = models.CharField(max_length=10, db_index=True, verbose_name="Имя автора")
     comment_text = models.TextField(db_index=True, verbose_name="Текст комментария")
     comment_film = models.ForeignKey(Movie, on_delete=models.CASCADE, verbose_name="Фильм")
-    comment_date = models.DateTimeField(auto_now_add=True)
+    comment_date = models.DateTimeField(auto_now_add=True, verbose_name="Дата комментария")
     author_email = models.EmailField(max_length=75, verbose_name="Адрес электронной почты")
 
     def __str__(self):
@@ -77,24 +77,28 @@ class Schedule(models.Model):
     movie_date = models.DateTimeField(verbose_name="Дата фильма")
     movie_name = models.ForeignKey(Movie, on_delete=models.CASCADE, verbose_name="Название фильма")
     movie_price = models.DecimalField(max_digits=4, decimal_places=0, verbose_name="Стоимость билета")
-    movie_format = models.CharField(max_length=2, db_index=True, verbose_name="Формат фильма", choices = MOVIE_FORMATS)
+    movie_format = models.CharField(max_length=4, db_index=True, verbose_name="Формат фильма", choices = MOVIE_FORMATS)
     def save(self, *args, **kwargs):
         super(Schedule, self).save(*args, **kwargs) # Call the "real" save() method.
-        about = About.objects.get(id=1)
-        rows_count = int(about.hall_rows_count)
-        places_count = int(about.hall_places_count)
-        n_bd = 1
-        for row in range(1, rows_count+1):
-            for pl in range(1, places_count+1):
-                new_place = Place.objects.create(
-                    schedule = Schedule.objects.get(id=self.id),
-                    hall_row = str(row),
-                    hall_place = str(pl),
-                    place_num = n_bd,
-                    is_bought = False
-                )
-                new_place.save()
-                n_bd += 1
+
+        curr_schedule = Schedule.objects.get(id=self.id)
+
+        if curr_schedule.place_set.all().count() == 0:
+            about = About.objects.get(id=1)
+            rows_count = int(about.hall_rows_count)
+            places_count = int(about.hall_places_count)
+            n_bd = 1
+            for row in range(1, rows_count+1):
+                for pl in range(1, places_count+1):
+                    new_place = Place.objects.create(
+                        schedule = curr_schedule,
+                        hall_row = str(row),
+                        hall_place = str(pl),
+                        place_num = n_bd,
+                        is_bought = False
+                    )
+                    new_place.save()
+                    n_bd += 1
 
     def __str__(self):
         return '{0}/{1}'.format(self.movie_name.title, self.movie_date)
@@ -111,7 +115,7 @@ class Place(models.Model):
     hall_row = models.CharField(max_length=2, db_index=True, verbose_name="Ряд")
     hall_place = models.CharField(max_length=2, db_index=True, verbose_name="Место")
     place_num = models.DecimalField(max_digits=4, decimal_places=0, verbose_name="МестоБД")
-    is_bought = models.BooleanField(default=True)
+    is_bought = models.BooleanField(default=True, verbose_name="Куплено?")
 
     def get_absolute_url(self):
         return reverse('buy_ticket_url', kwargs={'id': self.schedule.id, 'id_db':self.place_num})

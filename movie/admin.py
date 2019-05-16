@@ -31,9 +31,6 @@ class PlaceFilter(admin.SimpleListFilter):
 class ScheduleInline(admin.TabularInline):
     model = Schedule
 
-class PlaceInline(admin.TabularInline):
-    model = Place
-
 class MovieAdmin(admin.ModelAdmin):
     class Meta:
         model = Movie
@@ -57,24 +54,22 @@ class ScheduleAdmin(admin.ModelAdmin):
 
     form = AdminScheduleForm
     list_display = ['movie_name', 'movie_date', 'movie_price', 'movie_format']
-    inlines = [
-        PlaceInline,
-    ]
 
 class PlaceAdmin(admin.ModelAdmin):
     class Meta:
         model = Place
 
-    # list_filter = ['schedule__movie_name__title', 'hall_row', 'hall_place']
     list_filter = (PlaceFilter, 'hall_row', 'hall_place',)
     search_fields = ['schedule__movie_name__title', '=hall_row', '=hall_place']
     list_display = ['get_movie_name', 'get_movie_date', 'hall_row', 'hall_place', 'is_bought']
 
     def get_movie_name(self, obj):
         return obj.schedule.movie_name.title
+    get_movie_name.short_description = 'Название фильма'
 
     def get_movie_date(self, obj):
         return obj.schedule.movie_date
+    get_movie_date.short_description = 'Дата сеанса'
 
 admin.site.register(Movie, MovieAdmin)
 admin.site.register(About)
